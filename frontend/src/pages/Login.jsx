@@ -1,10 +1,28 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Sign Up");
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+
+    const email = event.target[0].value;
+    const password = event.target[1].value;
+
+    try {
+      const response = await axios.post("http://localhost:4000/api/user/login", { email, password });
+
+      if (response.data.success) {
+        alert("Login successful!");
+        localStorage.setItem("token", response.data.token);
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("An error occurred during login.");
+    }
   }
 
   return (
