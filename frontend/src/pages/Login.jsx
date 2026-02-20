@@ -20,7 +20,7 @@ const Login = () => {
         : { name, email, password };
 
       // Use backendUrl from context for consistency
-      const response = await axios.post(`KSh{backendUrl}KSh{endpoint}`, payload);
+      const response = await axios.post(`${backendUrl}${endpoint}`, payload);
 
       if (response.data.success) {
         // --- MODIFIED: Update BOTH state and localStorage ---

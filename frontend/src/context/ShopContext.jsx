@@ -3,6 +3,9 @@ import { products as initialProducts } from "../assets/assets";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; // IMPORT THIS
 
+// Define the backendUrl using environment variable or fallback
+const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+
 export const ShopContext = createContext(); 
 
 const ShopContextProvider = (props) => {
@@ -58,7 +61,8 @@ const ShopContextProvider = (props) => {
         cartItems, 
         addToCart, 
         getCartCount,
-        navigate // ADD THIS TO THE VALUE OBJECT
+        navigate, // ADD THIS TO THE VALUE OBJECT
+        backendUrl // Include backendUrl in the context
     };
 
     return (
