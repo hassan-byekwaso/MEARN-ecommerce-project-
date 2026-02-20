@@ -8,9 +8,9 @@ const Footer = () => {
         <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
             <div>
                 <Link to='/'>
-                    <img src={assets.logo} className='w-32 mb-5 cursor-pointer' alt="Trendify" />
+                    <img src={assets.logo} className='w-32 mb-5 cursor-pointer' alt="Soko Mkononi" />
                 </Link>
-                <p className='w-full text-gray-600 md:w-2/3'>Thank you for shopping with Trendify! We're dedicated to bringing you the latest trends and top-quality products. Follow us on social media for updates on new arrivals, exclusive offers, and more. If you have any questions or need assistance, our friendly customer support team is here to help. Subscribe to our newsletter for special discounts and be the first to know about our latest promotions. Your style journey starts here—let's make it unforgettable!</p>
+                <p className='w-full text-gray-600 md:w-2/3'>Thank you for shopping with Soko Mkononi! We're dedicated to bringing you fresh, authentic Kenyan staples and top-quality products. Follow us on social media for updates on new arrivals, exclusive offers, and more. If you have any questions or need assistance, our friendly customer support team is here to help. Subscribe to our newsletter for special discounts and be the first to know about our latest promotions. Your journey to freshness starts here—let's make it unforgettable!</p>
             </div>
 
             <div>
@@ -34,8 +34,8 @@ const Footer = () => {
             <div>
                 <p className='mb-5 text-xl font-medium'>GET IN TOUCH</p>
                 <ul className='flex flex-col gap-1 text-gray-600'>
-                    <li>+11-558-669-447</li>
-                    <li>contact.trendify@info.com</li>
+                    <li>+254-700-123-456</li>
+                    <li>support@sokomkononi.co.ke</li>
                 </ul>
             </div>
         </div>

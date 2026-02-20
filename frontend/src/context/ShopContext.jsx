@@ -1,119 +1,68 @@
 import { createContext, useEffect, useState } from "react";
-import { products } from "../assets/assets";
+import { products as initialProducts } from "../assets/assets"; // Ensure this matches your assets file
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-export const ShopContext = createContext();
+// 1. This is the Named Export that ProductItem.jsx is looking for
+export const ShopContext = createContext(); 
 
 const ShopContextProvider = (props) => {
-  const [search, setSearch] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
-  const [cartItems, setCartItems] = useState({});
-  const navigate = useNavigate();
+    const currency = 'KSh';
+    const delivery_fee = 50;
+    const [search, setSearch] = useState('');
+    const [showSearch, setShowSearch] = useState(false);
+    const [cartItems, setCartItems] = useState({});
 
-  const currency = "$";
-  const delivery_fee = 10;
-
-  useEffect(() => {
-    // INFO: Load cart items from localStorage when the component mounts
-    const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-    if (storedCartItems) {
-      setCartItems(storedCartItems);
-    }
-  }, []);
-
-  useEffect(() => {
-    // INFO: Save cart items to localStorage whenever cartItems changes
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addToCart = async (itemId, size) => {
-    if (!size) {
-      toast.error("Please Select a Size");
-      return;
-    } else {
-      toast.success("Item Added To The Cart");
-    }
-
-    let cartData = structuredClone(cartItems);
-
-    if (cartData[itemId]) {
-      if (cartData[itemId][size]) {
-        cartData[itemId][size] += 1;
-      } else {
-        cartData[itemId][size] = 1;
-      }
-    } else {
-      cartData[itemId] = {};
-      cartData[itemId][size] = 1;
-    }
-
-    setCartItems(cartData);
-  };
-
-  const getCartCount = () => {
-    let totalCount = 0;
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        try {
-          if (cartItems[items][item] > 0) {
-            totalCount += cartItems[items][item];
-          }
-        } catch (error) {
-          // INFO: Error Handling
+    const addToCart = async (itemId, size) => {
+        if (!size) {
+            toast.error("Please select Weight/Quantity");
+            return;
         }
-      }
-    }
-    return totalCount;
-  };
+        let cartData = structuredClone(cartItems);
+        if (cartData[itemId]) {
+            if (cartData[itemId][size]) {
+                cartData[itemId][size] += 1;
+            } else {
+                cartData[itemId][size] = 1;
+            }
+        } else {
+            cartData[itemId] = {};
+            cartData[itemId][size] = 1;
+        }
+        setCartItems(cartData);
+        toast.success("Added to cart");
+    };
 
-  const updateQuantity = async (itemId, size, quantity) => {
-    if (quantity === 0) {
-      const productData = products.find((product) => product._id === itemId);
-      toast.success("Item Removed From The Cart");
-    }
+    const getCartCount = () => {
+        let totalCount = 0;
+        for (const items in cartItems) {
+            for (const item in cartItems[items]) {
+                if (cartItems[items][item] > 0) {
+                    totalCount += cartItems[items][item];
+                }
+            }
+        }
+        return totalCount;
+    };
 
-    let cartData = structuredClone(cartItems);
+    const value = {
+        products: initialProducts, 
+        currency, 
+        delivery_fee,
+        search, 
+        setSearch, 
+        showSearch, 
+        setShowSearch,
+        cartItems, 
+        addToCart, 
+        getCartCount
+    };
 
-    cartData[itemId][size] = quantity;
-
-    setCartItems(cartData);
-  };
-
-  const getCartAmount = () => {
-    let totalAmount = 0;
-    for (const items in cartItems) {
-      let itemInfo = products.find((product) => product._id === items);
-      for (const item in cartItems[items]) {
-        try {
-          if (cartItems[items][item] > 0) {
-            totalAmount += itemInfo.price * cartItems[items][item];
-          }
-        } catch (error) {}
-      }
-    }
-    return totalAmount;
-  };
-
-  const value = {
-    products,
-    currency,
-    delivery_fee,
-    search,
-    setSearch,
-    showSearch,
-    setShowSearch,
-    cartItems,
-    addToCart,
-    getCartCount,
-    updateQuantity,
-    getCartAmount,
-    navigate,
-  };
-
-  return (
-    <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>
-  );
+    return (
+        <ShopContext.Provider value={value}>
+            {props.children}
+        </ShopContext.Provider>
+    );
 };
 
+// 2. This is the Default Export for your main.jsx
 export default ShopContextProvider;

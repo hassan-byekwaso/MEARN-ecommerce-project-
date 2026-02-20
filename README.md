@@ -90,7 +90,7 @@ CLOUDINARY_CLOUD_NAME =
 
 JWT_SECRET =
 
-ADMIN_EMAIL = "admin@trendify.com" #For testing only
+ADMIN_EMAIL = "hassan00byekwaso@gmail.com" #For testing only
 
 ADMIN_PASSWORD = "admin@123" #For testing only
 

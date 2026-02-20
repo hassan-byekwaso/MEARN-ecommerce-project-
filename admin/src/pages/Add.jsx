@@ -212,7 +212,7 @@ const Add = ({ token }) => {
               }
             >
               <p
-                className={`${
+                className={`KSh{
                   sizes.includes(size)
                     ? "bg-gray-500 text-white rounded-md"
                     : "bg-slate-200"

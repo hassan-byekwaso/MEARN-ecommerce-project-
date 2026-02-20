@@ -72,7 +72,7 @@ const Cart = () => {
           <div className='w-full text-end'>
             <button 
               onClick={() => navigate('/place-order')} 
-              className={`px-8 py-3 my-8 text-sm text-white bg-black active:bg-gray-700 ${isCartEmpty ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`px-8 py-3 my-8 text-sm text-white bg-black active:bg-gray-700 KSh{isCartEmpty ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={isCartEmpty}
             >
               PROCEED TO CHECKOUT

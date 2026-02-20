@@ -27,5 +27,5 @@ app.get("/", (req, res) => {
 
 // INFO: Start server
 app.listen(port, () =>
-  console.log(`Server is running on at http://localhost:${port}`)
+  console.log(`Server is running on at http://localhost:KSh{port}`)
 );
