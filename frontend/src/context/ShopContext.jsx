@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { products as initialProducts } from "../assets/assets"; // Ensure this matches your assets file
+import { products as initialProducts } from "../assets/assets";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // IMPORT THIS
 
-// 1. This is the Named Export that ProductItem.jsx is looking for
 export const ShopContext = createContext(); 
 
 const ShopContextProvider = (props) => {
@@ -11,6 +11,9 @@ const ShopContextProvider = (props) => {
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
+    
+    // INITIALIZE NAVIGATE HERE
+    const navigate = useNavigate();
 
     const addToCart = async (itemId, size) => {
         if (!size) {
@@ -54,7 +57,8 @@ const ShopContextProvider = (props) => {
         setShowSearch,
         cartItems, 
         addToCart, 
-        getCartCount
+        getCartCount,
+        navigate // ADD THIS TO THE VALUE OBJECT
     };
 
     return (
@@ -64,5 +68,4 @@ const ShopContextProvider = (props) => {
     );
 };
 
-// 2. This is the Default Export for your main.jsx
 export default ShopContextProvider;
