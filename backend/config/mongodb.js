@@ -5,7 +5,8 @@ const connectDB = async () => {
     console.log("MongoDB connected");
   });
 
-  await mongoose.connect(`KSh{process.env.MONGODB_URI}/soko-mkononi`, {);
+  // Fixed: Changed 'KSh{' to '${' and removed the stray '{' and ',' 
+  await mongoose.connect(`${process.env.MONGODB_URI}/soko-mkononi`);
 };
 
 export default connectDB;

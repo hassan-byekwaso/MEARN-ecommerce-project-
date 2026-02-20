@@ -1,5 +1,5 @@
 import p_img1 from './p_img1.png'
-// ... keep all your p_img imports exactly as they are ...
+// ... keep all your other p_img imports exactly as they are ...
 import logo from './logo.png'
 import hero_img from './hero_img.png'
 import cart_icon from './cart_icon.png'
@@ -14,24 +14,17 @@ import contact_img from './contact_img.png'
 
 export const shopName = "Soko Mkononi";
 
-export const contactInfo = {
+// CHANGED: Renamed from contactInfo to contactDetails
+export const contactDetails = {
     phone: "0794290546",
     email: "hassan00byekwaso@gmail.com",
     location: "Gatwekera, Kibra, Nairobi"
 };
 
 export const assets = {
-    logo,
-    hero_img,
-    cart_icon,
-    dropdown_icon,
-    search_icon,
-    star_icon,
-    star_dull_icon,
-    bin_icon,
-    menu_icon,
-    about_img,
-    contact_img
+    logo, hero_img, cart_icon, dropdown_icon, search_icon, 
+    star_icon, star_dull_icon, bin_icon, menu_icon, 
+    about_img, contact_img
 };
 
 export const products = [
@@ -47,5 +40,5 @@ export const products = [
         date: 1716634345448,
         bestseller: true
     },
-    // Add your other products here using Category: Food, Beverages, or Household
+    // Add more products here...
 ];
