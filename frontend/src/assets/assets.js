@@ -11,10 +11,12 @@ import bin_icon from './bin_icon.png'
 import menu_icon from './menu_icon.png'
 import about_img from './about_img.png'
 import contact_img from './contact_img.png'
+import profile_icon from './profile_icon.png'
 
-export const shopName = "Soko Mkononi";
+export const shopName = "Soko Mkononi: Freshness Delivered to Gatwekera.";
 
-// CHANGED: Renamed from contactInfo to contactDetails
+export const aboutUsText = "We bridge the gap between fresh farm produce and your doorstep in Kibra. Quality essentials at local prices.";
+
 export const contactDetails = {
     phone: "0794290546",
     email: "hassan00byekwaso@gmail.com",
@@ -24,7 +26,7 @@ export const contactDetails = {
 export const assets = {
     logo, hero_img, cart_icon, dropdown_icon, search_icon, 
     star_icon, star_dull_icon, bin_icon, menu_icon, 
-    about_img, contact_img
+    about_img, contact_img, profile_icon // Added profile_icon
 };
 
 export const products = [

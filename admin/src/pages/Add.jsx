@@ -162,13 +162,13 @@ const Add = ({ token }) => {
           <select
             onChange={(e) => setCategory(e.target.value)}
             value={category}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
-            required
+            className="w-full px-3 py-2 border border-gray-800"
           >
             <option value="">Select Category</option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
+            <option value="Fresh Produce">Fresh Produce</option>
+            <option value="Pantry Staples">Pantry Staples</option>
+            <option value="Beverages">Beverages</option>
+            <option value="Household">Household</option>
           </select>
         </div>
         <div>
@@ -176,13 +176,37 @@ const Add = ({ token }) => {
           <select
             onChange={(e) => setSubCategory(e.target.value)}
             value={subCategory}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
-            required
+            className="w-full px-3 py-2 border border-gray-800"
           >
             <option value="">Select Sub Category</option>
-            <option value="Topwear">Topwear</option>
-            <option value="Bottomwear">Bottomwear</option>
-            <option value="Winterwear">Winterwear</option>
+            {category === "Fresh Produce" && (
+              <>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Herbs">Herbs</option>
+              </>
+            )}
+            {category === "Pantry Staples" && (
+              <>
+                <option value="Grains (Unga)">Grains (Unga)</option>
+                <option value="Cooking Oil">Cooking Oil</option>
+                <option value="Sugar">Sugar</option>
+              </>
+            )}
+            {category === "Beverages" && (
+              <>
+                <option value="Tea">Tea</option>
+                <option value="Coffee">Coffee</option>
+                <option value="Juices">Juices</option>
+                <option value="Water">Water</option>
+              </>
+            )}
+            {category === "Household" && (
+              <>
+                <option value="Cleaning Supplies">Cleaning Supplies</option>
+                <option value="Toiletries">Toiletries</option>
+              </>
+            )}
           </select>
         </div>
         <div>
@@ -198,27 +222,27 @@ const Add = ({ token }) => {
         </div>
       </div>
       <div>
-        <p className="mb-2 text-lg font-semibold">Product Sizes</p>
+        <p className="mb-2 text-lg font-semibold">Measurement Unit</p>
         <div className="flex gap-3">
-          {["S", "M", "L", "XL", "XXL"].map((size) => (
+          {["500g", "1kg", "2kg", "5kg", "Bunch", "Litre", "Piece"].map((unit) => (
             <div
-              key={size}
+              key={unit}
               onClick={() =>
                 setSizes((prev) =>
-                  prev.includes(size)
-                    ? prev.filter((item) => item !== size)
-                    : [...prev, size]
+                  prev.includes(unit)
+                    ? prev.filter((item) => item !== unit)
+                    : [...prev, unit]
                 )
               }
             >
               <p
-                className={`KSh{
-                  sizes.includes(size)
-                    ? "bg-gray-500 text-white rounded-md"
+                className={`${
+                  sizes.includes(unit)
+                    ? "bg-green-100 border-green-400"
                     : "bg-slate-200"
-                } px-3 py-1 cursor-pointer`}
+                } px-3 py-1 cursor-pointer border rounded transition-all`}
               >
-                {size}
+                {unit}
               </p>
             </div>
           ))}

@@ -3,12 +3,45 @@ import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('cod');
   const {navigate} = useContext(ShopContext);
   
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    try {
+        let orderItems = [];
+        // ... (existing logic to gather cart items)
+
+        let orderData = {
+            address: formData,
+            items: orderItems,
+            amount: getCartAmount() + delivery_fee,
+            phone: formData.phone // Ensure your address form has a phone field!
+        }
+
+        switch (method) {
+            case 'mpesa':
+                const response = await axios.post(`${backendUrl}/api/order/mpesa`, orderData, { headers: { token } });
+                if (response.data.success) {
+                    toast.success("Check your phone for the M-Pesa popup!");
+                    navigate('/orders');
+                } else {
+                    toast.error(response.data.message);
+                }
+                break;
+            
+            // ... other cases
+        }
+    } catch (error) {
+        toast.error(error.message);
+    }
+  }
+
   return (
     <div className='flex flex-col justify-between gap-4 pt-5 sm:flex-row sm:pt-14 min-h-[80vh] border-t'>
       {/* Left Side Content */}
@@ -89,9 +122,13 @@ const PlaceOrder = () => {
               <p className={`min-w-3.5 h-3.5 border rounded-full KSh{method === 'cod' ? 'bg-green-600' : ''}`}></p>
               <p className='mx-4 text-sm font-medium text-gray-500'>CASH ON DELIVERY</p>
             </div>
+            <div onClick={() => setMethod('mpesa')} className='flex items-center gap-3 p-2 px-3 border cursor-pointer'>
+              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'mpesa' ? 'bg-green-600' : ''}`}></p>
+              <img className='h-5 mx-4' src={assets.mpesa_logo} alt="M-Pesa" />
+            </div>
           </div>
           <div className='w-full mt-8 text-end'>
-            <button onClick={() => navigate('/orders')} className='px-16 py-3 text-sm text-white bg-black active:bg-gray-800'>PLACE ORDER</button>
+            <button onClick={onSubmitHandler} className='px-16 py-3 text-sm text-white bg-black active:bg-gray-800'>PLACE ORDER</button>
           </div>
         </div>
       </div>
